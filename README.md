@@ -27,7 +27,7 @@
     <img src=".github/assets/jr-logo-bordered.svg" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">short.</h3>
+<h3 align="center">just. release.</h3>
 
   <p align="center">
     Short is a lightweight and simple link shortener working on Cloudflare Workers®.bbh
