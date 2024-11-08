@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ES2022", // Target latest ECMAScript version for modern browsers and Node.js
+    "module": "commonjs", // Use CommonJS modules for Node.js compatibility
+    "moduleResolution": "node", // Use Node.js module resolution strategy
+    "outDir": "./dist", // Output directory for compiled JavaScript files
+    "esModuleInterop": true, // Enable interop between CommonJS and ES modules
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names
+    "strict": true, // Enable strict type checking
+    "noImplicitAny": true, // Disallow implicit any types
+    "strictNullChecks": true, // Enable strict null checks
+    "noImplicitThis": true, // Disallow implicit 'this'
+    "alwaysStrict": true, // Enforce use of 'use strict'
+    "skipLibCheck": true, // Skip type checking for external libraries
+    "sourceMap": true, // Generate source maps for debugging
+    "declaration": true, // Generate .d.ts declaration files
+    "declarationMap": true, // Generate .d.ts.map source maps
+    "lib": ["ES2022", "DOM"], // Include necessary library definitions
+    "baseUrl": ".", // Base directory to resolve non-relative module names
+    "paths": {
+      "@/*": ["src/*"] // Alias for source files
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
