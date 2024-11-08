@@ -53,22 +53,18 @@ async function main() {
 
   var useGit = config.get('git.enabled') ?? await confirm({ message: 'Do you want to use git?', default: true });
 
-  console.log(useGit)
+  if (config.get('git.requireCleanWorkingDir') && useGit) {
+    if (!await gitCheckClean()) {
+      console.error('Working directory is not clean.');
+      process.exit(1);
+    }
+  }
 
   var packageJson = JSON.parse(await readFile(`${currentPath}/package.json`, 'utf8'));
   packageJson.version = newVersion;
   await writeFile(`${currentPath}/package.json`, JSON.stringify(packageJson, null, 2));
 
   if (useGit) {
-    if (config.get('git.requireCleanWorkingDir')) {
-      if (!await gitCheckClean()) {
-        console.error('Working directory is not clean.');
-        packageJson.version = currentVersion;
-        await writeFile(`${currentPath}/package.json`, JSON.stringify(packageJson, null, 2));
-        process.exit(1);
-      }
-    }
-
     if (config.get('git.commit')) {
       console.log('Committing changes...');
       await gitAdd();
