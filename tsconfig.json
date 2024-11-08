@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES2022", // Target latest ECMAScript version for modern browsers and Node.js
-    "module": "commonjs", // Use CommonJS modules for Node.js compatibility
-    "moduleResolution": "node", // Use Node.js module resolution strategy
+    "target": "ESNext", // Target latest ECMAScript version for modern browsers and Node.js
+    "module": "ESNext", // Use CommonJS modules for Node.js compatibility
+    "moduleResolution": "Node", // Use Node.js module resolution strategy
     "outDir": "./dist", // Output directory for compiled JavaScript files
     "esModuleInterop": true, // Enable interop between CommonJS and ES modules
     "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names
@@ -15,7 +15,6 @@
     "sourceMap": true, // Generate source maps for debugging
     "declaration": true, // Generate .d.ts declaration files
     "declarationMap": true, // Generate .d.ts.map source maps
-    "lib": ["ES2022", "DOM"], // Include necessary library definitions
     "baseUrl": ".", // Base directory to resolve non-relative module names
     "resolveJsonModule": true,
     "paths": {

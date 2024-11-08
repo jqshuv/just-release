@@ -7,6 +7,9 @@
   "license": "MIT",
   "type": "module",
   "repository": "https://github.com/jqshuv/just-release",
+  "bin": {
+    "just-release": "dist/index.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",

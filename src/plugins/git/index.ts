@@ -11,7 +11,7 @@ export type GitCommits = {
   authorEmail: string;
 };
 
-async function isGitRepository() {
+export async function isGitRepository() {
   return await execa('git', ['status']).then(() => true).catch(() => false);
 }
 
@@ -50,16 +50,6 @@ export async function gitGetLatestTag() {
   }).catch(() => {
     return '';
   });
-}
-
-export async function gitPlugin(version: string) {
-  if (!await isGitRepository()) {
-    throw new Error('Not a git repository');
-  }
-
-
-
-  console.log('Git plugin');
 }
 
 export async function gitCheckClean() {

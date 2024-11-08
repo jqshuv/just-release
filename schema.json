@@ -1,0 +1,92 @@
+{
+  "_cvtProperties": {
+    "$schema": {
+      "doc": "Schema version",
+      "format": "string",
+      "default": "0.0.0"
+    },
+    "git": {
+      "_cvtProperties": {
+        "enabled": {
+          "doc": "Enable git",
+          "format": "boolean",
+          "default": false
+        },
+        "commit": {
+          "doc": "Commit changes",
+          "format": "boolean",
+          "default": true
+        },
+        "commitMessage": {
+          "doc": "Commit message",
+          "format": "string",
+          "default": "chore(release): :rocket: ${version}"
+        },
+        "commitArgs": {
+          "doc": "Commit arguments",
+          "format": "array",
+          "default": []
+        },
+        "tag": {
+          "doc": "Tag the release",
+          "format": "boolean",
+          "default": true
+        },
+        "tagName": {
+          "doc": "Tag message",
+          "format": "string",
+          "default": "v${version}"
+        },
+        "tagArgs": {
+          "doc": "Tag arguments",
+          "format": "array",
+          "default": []
+        },
+        "tagAnnotation": {
+          "doc": "Tag annotation",
+          "format": "string",
+          "default": "Release ${version}"
+        },
+        "push": {
+          "doc": "Push changes",
+          "format": "boolean",
+          "default": true
+        },
+        "requireCleanWorkingDir": {
+          "doc": "Require a clean working directory",
+          "format": "boolean",
+          "default": true
+        },
+        "changelog": {
+          "doc": "Generate changelog",
+          "format": "string",
+          "default": "default"
+        }
+      }
+    },
+    "github": {
+      "_cvtProperties": {
+        "enabled": {
+          "doc": "Enable GitHub",
+          "format": "boolean",
+          "default": false
+        },
+        "release": {
+          "doc": "Create a GitHub release",
+          "format": "boolean",
+          "default": true
+        },
+        "releaseName": {
+          "doc": "Release name",
+          "format": "string",
+          "default": "Release ${version}"
+        },
+        "releaseBody": {
+          "doc": "Release body",
+          "format": "string",
+          "default": ""
+        }
+      }
+    }
+  }
+}

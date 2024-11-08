@@ -8,16 +8,16 @@ import { existsSync } from 'fs';
 import { join } from 'path';
 
 const config = convict({
-  test: {
-    doc: 'A test value',
+  "$schema": {
+    doc: 'Schema version',
     format: String,
-    default: 'test'
+    default: '0.0.0'
   },
   git: {
     enabled: {
       doc: 'Enable git',
-      format: Boolean || undefined,
-      default: undefined
+      format: Boolean,
+      default: false
     },
     commit: {
       doc: 'Commit changes',
@@ -69,6 +69,28 @@ const config = convict({
       format: String,
       default: 'default'
     }
+  },
+  github: {
+    enabled: {
+      doc: 'Enable GitHub',
+      format: Boolean,
+      default: false
+    },
+    release: {
+      doc: 'Create a GitHub release',
+      format: Boolean,
+      default: true
+    },
+    releaseName: {
+      doc: 'Release name',
+      format: String,
+      default: 'Release ${version}'
+    },
+    releaseBody: {
+      doc: 'Release body',
+      format: String,
+      default: ''
+    },
   }
 });
 
