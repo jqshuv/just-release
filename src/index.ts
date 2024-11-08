@@ -9,17 +9,22 @@ import semver from 'semver';
 import { gitAdd, gitCheckClean, gitCommit, gitPlugin, gitPush, gitPushTags, gitTag } from './plugins/git';
 import { readFile, writeFile } from 'fs/promises';
 import config from './config/config';
+import path, { join } from 'path';
+import { pathToFileURL } from 'url';
 
 const currentPath = process.cwd();
 console.log(config.get('git.enabled'));
 
+console.log(pathToFileURL(join(currentPath, 'package.json')).href)
+
 async function main() {
-  if (!existsSync(`${currentPath}/package.json`)) {
+  if (!existsSync(join(currentPath, 'package.json'))) {
     console.error('No package.json found in the current directory.');
     process.exit(1);
   }
 
-  const currentVersion = await import(`${currentPath}/package.json`).then((pkg) => pkg.version);
+  const packageJsonUrl = pathToFileURL(join(currentPath, 'package.json')).href;
+  const currentVersion = await import(packageJsonUrl).then((pkg) => pkg.version);
 
   const majorVersion = semver.inc(currentVersion, 'major') || '';
   const minorVersion = semver.inc(currentVersion, 'minor') || '';
