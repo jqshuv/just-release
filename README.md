@@ -266,7 +266,7 @@ Me and this project are not affiliated with Cloudflare, Inc. or GitHub, Inc. in 
 [wakatime-shield]: https://wakatime.com/badge/user/b80127f3-fcf6-417a-9cdd-107757c5022f/project/691d39e9-e109-43f2-af91-657d977c1b18.svg?style=for-the-badge
 [wakatime-url]: https://wakatime.com/@jqshuv/projects/ttqahjjgfm
 
-[banner]: .github/assets/short-banner.svg
+[banner]: .github/assets/jr-banner-long.svg
 
 [cf-workers]: https://img.shields.io/badge/Cloudflare_Workers-ffffff?style=for-the-badge&logo=cloudflareworkers&logoColor=F38020
 [cf-workers-url]: https://workers.cloudflare.com/
