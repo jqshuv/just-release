@@ -6,10 +6,12 @@
 import { confirm, select } from '@inquirer/prompts';
 import { existsSync } from 'fs';
 import semver from 'semver';
-import { gitCheckClean, gitPlugin } from './plugins/git';
+import { gitAdd, gitCheckClean, gitCommit, gitPlugin, gitPush, gitPushTags, gitTag } from './plugins/git';
 import { readFile, writeFile } from 'fs/promises';
+import config from './config/config';
 
 const currentPath = process.cwd();
+console.log(config.get('git.enabled'));
 
 async function main() {
   if (!existsSync(`${currentPath}/package.json`)) {
@@ -48,32 +50,53 @@ async function main() {
     process.exit(1);
   }
 
-  const useGit = await confirm({ message: 'Do you want to use git?', default: true });
 
-  if (useGit) {
-    const isClean = await gitCheckClean();
-    // if (!isClean) {
-    //   console.error('Git is not clean.');
-    //   process.exit(1);
-    // }
-  }
+  var useGit = config.get('git.enabled') ?? await confirm({ message: 'Do you want to use git?', default: true });
+
+  console.log(useGit)
 
   var packageJson = JSON.parse(await readFile(`${currentPath}/package.json`, 'utf8'));
-
   packageJson.version = newVersion;
+  await writeFile(`${currentPath}/package.json`, JSON.stringify(packageJson, null, 2));
 
-  console.log(`New version: ${newVersion}`);
+  if (useGit) {
+    if (config.get('git.requireCleanWorkingDir')) {
+      if (!await gitCheckClean()) {
+        console.error('Working directory is not clean.');
+        packageJson.version = currentVersion;
+        await writeFile(`${currentPath}/package.json`, JSON.stringify(packageJson, null, 2));
+        process.exit(1);
+      }
+    }
+
+    if (config.get('git.commit')) {
+      console.log('Committing changes...');
+      await gitAdd();
+      await gitCommit(config.get('git.commitMessage').replace('${version}', newVersion), config.get('git.commitArgs'));
+    }
+
+    if (config.get('git.tag')) {
+      console.log('Tagging release...');
+      await gitTag(config.get('git.tagName').replace('${version}', newVersion), config.get('git.tagArgs'), config.get('git.tagAnnotation').replace('${version}', newVersion));
+    }
+
+    if (config.get('git.push')) {
+      console.log('Pushing changes...');
+      await gitPush();
+      await gitPushTags();
+    }
+
+    if (config.get('git.changelog') === 'default') {
+      console.log('Generating changelog...');
+    }
+  }
+
 
   const confirmVersion = await confirm({ message: 'Do you want to continue?' });
 
   if (!confirmVersion) {
     process.exit(1);
   }
-
-  console.log('Writing package.json...');
-  await writeFile(`${currentPath}/package.json`, JSON.stringify(packageJson, null, 2));
-
-  gitPlugin(newVersion);
 
 }
 

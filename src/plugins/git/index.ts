@@ -15,12 +15,13 @@ async function isGitRepository() {
   return await execa('git', ['status']).then(() => true).catch(() => false);
 }
 
-async function gitAdd() {
+export async function gitAdd() {
   await execa('git', ['add', '.']);
+  return;
 }
 
-async function gitCommit(message: string, args?: string[]) {
-  if (args) {
+export async function gitCommit(message: string, args?: string[]) {
+  if (args && args.length > 0) {
     await execa('git', ['commit', '-m', message, ...args]);
     return;
   } else {
@@ -28,21 +29,19 @@ async function gitCommit(message: string, args?: string[]) {
   }
 }
 
-async function gitTag(tag: string, args?: string[]) {
-  if (args) {
-    await execa('git', ['tag', tag, ...args]);
+export async function gitTag(tag: string, args?: string[], annotation?: string) {
+    await execa('git', ['tag', tag, '-a', ...(annotation ? [annotation] : []), ...(args || [])]);
     return;
-  } else {
-    await execa('git', ['tag', tag]);
-  }
 }
 
-async function gitPush() {
+export async function gitPush() {
   await execa('git', ['push']);
+  return;
 }
 
-async function gitPushTags() {
+export async function gitPushTags() {
   await execa('git', ['push', '--tags']);
+  return;
 }
 
 export async function gitGetLatestTag() {
@@ -58,9 +57,7 @@ export async function gitPlugin(version: string) {
     throw new Error('Not a git repository');
   }
 
-  await gitAdd();
-  // await gitCommit(`Release ${version}`);
-  // await gitTag(`v${version}`);
+
 
   console.log('Git plugin');
 }

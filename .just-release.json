@@ -1,0 +1,10 @@
+{
+  "git": {
+    "enabled": true,
+    "commitMessage": "chore(release): release v${version}",
+    "commitArgs": [
+      "-S"
+    ],
+    "tag": false
+  }
+}

@@ -17,6 +17,7 @@
     "declarationMap": true, // Generate .d.ts.map source maps
     "lib": ["ES2022", "DOM"], // Include necessary library definitions
     "baseUrl": ".", // Base directory to resolve non-relative module names
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"] // Alias for source files
     }
